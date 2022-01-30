@@ -9,7 +9,7 @@ TOKEN = os.environ.get('TOKEN')
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['courses'])
-def message_start(message):
+def message_courses(message):
     keybord = telebot.types.InLineKeyboardMarkup(row_width=1)
 
     with open('courses.txt') as file:
