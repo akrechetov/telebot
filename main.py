@@ -15,9 +15,9 @@ def message_start(message):
     with open('courses.txt') as file:
         courses = [item.split(',') for item in file]
 
-        fot title, link in courses:
-        url_button = telebot.types.InLineKeyboardButton(text=title.strip(), url=link.strip())
-        keyboard.add(url_button)
+        for title, link in courses:
+            url_button = telebot.types.InLineKeyboardButton(text=title.strip(), url=link.strip())
+            keyboard.add(url_button)
 
         bot.send_message(message.chat.id, 'List of courses', reply_markup=keybord)
 
