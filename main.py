@@ -10,7 +10,7 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['courses'])
 def message_start(message):
-    keybord = telebot.types.InLineKeyboardMarkup(row.width=1)
+    keybord = telebot.types.InLineKeyboardMarkup(row_width=1)
 
     with open('courses.txt') as file:
         courses = [item.split(',') for item in file]
