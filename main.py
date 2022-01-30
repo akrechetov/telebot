@@ -8,10 +8,26 @@ app = Flask(__name__)
 TOKEN = os.environ.get('TOKEN')
 bot = telebot.TeleBot(TOKEN)
 
+@bot.message_handler(commands=['courses'])
+def message_start(message):
+    keybord = telebot.types.InLineKeyboardMarkup(row.width=1)
+
+    with open('courses.txt') as file:
+        courses = [item.split(',') for item in file]
+
+        fot title, link in courses:
+        url_button = telebot.types.InLineKeyboardButton(text=title.strip(), url=link.strip())
+        keyboard.add(url_button)
+
+        bot.send_message(message.chat.id, 'List of courses', reply_markup=keybord)
+
+@bot.message.handler(func=lambda x: x.text.lower().startswith('python'))
+def message_text(message):
+    bot.send_message(message.chat.id, 'python!')
+
 @bot.message_handler(commands=['start'])
 def message_start(message):
     bot.send_message(message.chat.id, 'Hello user!')
-
 
 @app.route('/' + TOKEN, methods=['POST'])
 def get_message():
